@@ -1,6 +1,6 @@
 # 李朗凝 Langning Li — 个人主页
 
-单页静态网站（`index.html` + `style.css`），没有构建步骤，可以直接部署到 GitHub Pages、Netlify 或任何静态托管服务。
+单页静态网站（`index.html` + `en.html` + `style.css`），没有构建步骤，可以直接部署到 GitHub Pages、Netlify 或任何静态托管服务。
 
 ## 本地预览
 
@@ -18,6 +18,8 @@ python3 -m http.server 8000 --directory portfolio_site
 
 ## 更新内容
 
+- `index.html` 为中文主页，`en.html` 为英文主页，两者通过右上角语言链接切换。英文主页和英文简历的可入职时间为 Summer 2027。
+- 英文页面内容与 `resume_en.tex` 保持同步。
 - 页面文字以 `resume_zh.tex` 为准，简历改动后同步修改 `index.html`。
 - 运行仓库根目录的 `build_resumes.sh` 重新生成 PDF，它会把 PDF 复制到 `assets/`。
 - `assets/res-lib.webp` 中同事姓名已打码；替换截图时注意同样处理。

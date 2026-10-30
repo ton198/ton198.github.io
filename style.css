@@ -140,3 +140,7 @@ footer {
   .skills { grid-template-columns: 1fr; }
   .skills dd { margin-bottom: .5em; }
 }
+
+.language-switch { text-align: right; margin-bottom: 24px; font-size: 14px; color: var(--muted); }
+html[lang="en"] .skills { grid-template-columns: 9em 1fr; }
+@media (max-width: 640px) { html[lang="en"] .skills { grid-template-columns: 1fr; } }
