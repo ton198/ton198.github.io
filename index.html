@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>李朗凝 Langning Li</title>
+  <meta name="description" content="李朗凝，罗切斯特大学计算机科学与数学双学位本科生。研究语言模型输出的低秩结构，开发过 AI 互动绘本生产平台与 Agent 工作流。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="page">
+
+  <header class="intro">
+    <div class="intro-text">
+      <h1>李朗凝 <span class="name-en">Langning Li</span></h1>
+      <p>
+        我是罗切斯特大学（University of Rochester）计算机科学与数学双学位本科生，预计 2028 年 5 月毕业。目前在 Xiangxiang Xu 老师指导下研究语言模型输出的低秩结构。此前在中国科学院参与模型计算图数据集的爬取与清洗，并在 Auto Growth 开发 AI 互动绘本的编辑与生产平台，用 Agent 工作流实现了从策划案到交付的自动化。
+      </p>
+      <p>
+        正在寻找大模型应用、Agent 工程及相关研究方向的实习。2027 年 1 月起可到岗，每周 5 天线下全职，可实习至 8 月底。
+      </p>
+      <p class="links">
+        <a href="mailto:lli81@u.rochester.edu">lli81@u.rochester.edu</a>
+        <span class="sep">/</span>
+        <a href="assets/resume_zh.pdf">中文简历</a>
+        <span class="sep">/</span>
+        <a href="assets/resume_en.pdf">English CV</a>
+        <span class="sep">/</span>
+        <a href="https://github.com/ton198">GitHub</a>
+      </p>
+    </div>
+    <img class="photo" src="assets/photo.jpg" width="480" height="480" alt="李朗凝的照片">
+  </header>
+
+  <section>
+    <h2>科研与实习经历</h2>
+
+    <article class="entry">
+      <h3>LM-SVD：用 NeuralSVD 分析语言模型输出的低秩结构</h3>
+      <p class="meta">罗切斯特大学 · 研究助理 · 2026 年 9 月至今 · 导师：Xiangxiang Xu</p>
+      <p class="meta">开源仓库：<a href="https://github.com/ton198/lm-svd">https://github.com/ton198/lm-svd</a></p>
+      <p>
+        ICLR 2026 的一篇论文发现，语言模型在不同上下文下输出的 logits 高度相关，可以用少数几个方向近似，并通过对 logits 矩阵做 SVD 验证了这一点。本项目引入 ICML 2024 提出的 NeuralSVD（用神经网络学习矩阵的主要奇异方向），在传统 SVD 无法处理的规模上研究这一结构。
+      </p>
+      <ul>
+        <li>将 NeuralSVD 用于完整词表规模的 logits 矩阵，通过抽样训练 SVD 来近似原模型的输出分布；设计并训练长文本 embedding 模型来表示奇异函数，使其能够泛化到不同的上下文。</li>
+        <li>基于 NeuralSVD 改进原论文用 SVD 近似模型输出分布的方法（LinGen）：省去用小模型求解原分布的步骤，生成过程不再需要传统 LLM 推理，大幅降低了 LinGen 的时间和成本，KL divergence 相比原方法下降 36.8%。</li>
+      </ul>
+      <figure>
+        <a href="assets/lm-svd-spectrum.png"><img src="assets/lm-svd-spectrum.png" width="1800" height="675" loading="lazy" alt="logits 矩阵的奇异值谱（双对数坐标）与累计能量曲线"></a>
+        <figcaption>GPT-2 small 在 WikiText-103 上的中心化 logits 矩阵（512 × 25600，行为上文，列为后续文本与候选 token 的组合，已去除第一个主成分）的奇异值谱。奇异值大致按幂律衰减，前 100 个方向约占 84% 的能量。</figcaption>
+      </figure>
+    </article>
+
+    <article class="entry">
+      <h3>Younger：基于模型计算图的数据爬取和清洗</h3>
+      <p class="meta">中国科学院 · 研究助理 · 2026 年 5 月 — 9 月 · 导师：杨郑鑫</p>
+      <p class="meta">开源仓库：<a href="https://github.com/Yangs-AI/Younger-Logics-IR">https://github.com/Yangs-AI/Younger-Logics-IR</a></p>
+      <p>
+        用梯度下降训练的模型，其性能在很大程度上由架构决定。分析模型的计算图可以部分预测模型的性能指标，并针对不同任务优化架构。项目希望从 Hugging Face 上爬取尽可能多的模型计算图制作数据集，用来训练 GNN 模型，实现对计算图的分析和优化。
+      </p>
+      <ul>
+        <li>针对不同格式、不同版本的模型开发相应的计算图提取程序，统一转换为 ONNX 中间表示，提取计算图并转为 DAG 存储，用于模型训练。</li>
+        <li>开发基于大模型的任务与性能信息抽取程序：通过限定输出格式，从非标准化的 Hugging Face 模型 README 中提取任务、数据集和评测指标，用于构建评测数据集。</li>
+      </ul>
+    </article>
+
+    <article class="entry">
+      <h3>AI 互动绘本生产平台与 Agent 自动化工作流</h3>
+      <p class="meta">Auto Growth（自成长）· 软件工程实习生 · 2026 年 5 月 — 9 月</p>
+      <p>
+        公司为美国儿童数字阅读平台 Epic! 批量供稿 AI 互动绘本。每本书包含页面、音视频、角色对话和嵌入式小游戏，传统流程依赖人工组装、逐页预览和手动检查素材，周期长且容易出错。我们希望搭建一套编辑与生产平台，并用 Agent 工作流把从策划案到交付的各个环节自动化，实现互动绘本的规模化生产。
+      </p>
+      <ul>
+        <li>开发团队内部使用的互动绘本编辑器和阅读器（Vue 3 + Node.js）。搭建互动控件开发框架及配套的开发调试工具：可模拟阅读器运行时环境，让互动控件脱离编辑器单独加载，实时调整参数并测试与外部 hook 的交互。互动内容的开发速度因此大幅提升，目前已完成近 500 个独立游戏。</li>
+        <li>将组装图书、移植游戏、检查素材等重复工作封装为 Agent Skills 和工作流，从策划案开始自动完成素材生成与检查、图书组装、互动游戏生成与适配、内容审核，打通图书生产全流程。单本书的生产周期缩短 90%，各项成本也大幅下降。</li>
+        <li>开发适配 Epic! 的兼容层，实现每本书的自动适配和交付。首批已向 Epic! 成功交付约 500 本互动绘本。</li>
+      </ul>
+      <figure>
+        <a href="assets/editor.webp"><img src="assets/editor.webp" width="2559" height="1467" loading="lazy" alt="互动绘本编辑器界面"></a>
+        <figcaption>图书编辑器：左侧为页面列表，中间是画布，右侧编辑页面背景、背景音乐和翻页门禁等属性。</figcaption>
+      </figure>
+      <div class="figure-row">
+        <figure>
+          <a href="assets/game-dev-platform.webp"><img src="assets/game-dev-platform.webp" width="2559" height="1462" loading="lazy" alt="互动控件开发平台界面"></a>
+          <figcaption>互动控件开发平台：控件脱离编辑器单独加载，可切换编辑预览和互动预览，下方面板查看共享状态、书状态和事件。</figcaption>
+        </figure>
+        <figure>
+          <a href="assets/res-lib.webp"><img src="assets/res-lib.webp" width="2559" height="1458" loading="lazy" alt="素材库界面"></a>
+          <figcaption>素材库：按文件夹管理图书项目，选中后进入对应的工作区（同事姓名已打码）。</figcaption>
+        </figure>
+      </div>
+      <p class="note">以上为公司内部系统，源码未公开。</p>
+    </article>
+  </section>
+
+  <section>
+    <h2>教育背景</h2>
+    <div class="row">
+      <strong>罗切斯特大学 University of Rochester</strong>
+      <span class="muted">预计 2028 年 5 月毕业</span>
+    </div>
+    <p>计算机科学（B.S.）+ 数学（B.A.）双学位，GPA 3.9/4.0</p>
+    <p class="muted">主修课程：机器学习理论、深度学习、算法设计与优化、高性能计算、编程语言设计、计算机组成等</p>
+  </section>
+
+  <section>
+    <h2>专业技能</h2>
+    <dl class="skills">
+      <dt>编程语言</dt>
+      <dd>Python、TypeScript/JavaScript、Java、C、SQL</dd>
+      <dt>机器学习</dt>
+      <dd>SFT、LoRA、SVD、PyTorch、Hugging Face Transformers、NumPy、Slurm GPU 集群</dd>
+      <dt>工程技术栈</dt>
+      <dd>Vue 3、Node.js、Docker、Playwright、Nginx、Git、Linux；Agent Skills（Claude Code / Codex / Oh My Pi）</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>校内与荣誉</h2>
+    <ul class="plain">
+      <li>
+        <div class="row"><strong>罗切斯特大学 Computer Science Undergrads 社团 Tutor</strong><span class="muted">2026 年 1 月至今</span></div>
+        组织社团开展 CS 科普，为 CS 系本科生提供课程辅导。
+      </li>
+      <li>
+        <div class="row"><strong>CS Workshop Leader</strong><span class="muted">2025 年 1 月至今</span></div>
+        每周主持 75 分钟 CS workshop，讲解习题、答疑并组织考前复习。
+      </li>
+      <li>
+        <div class="row"><strong>HiMCM 数学建模竞赛 Finalist</strong><span class="muted">2022 年 12 月</span></div>
+        美国高中生数学建模大赛二等奖，使用 LSTM 预测美国各州蜜蜂种群变化。
+      </li>
+    </ul>
+  </section>
+
+  <footer>最后更新：2026 年 10 月</footer>
+
+</main>
+</body>
+</html>
